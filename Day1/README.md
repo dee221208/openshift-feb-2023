@@ -665,3 +665,19 @@ root@ubuntu1:/# hostname -i
 root@ubuntu1:/# exit
 exit
 </pre>
+
+
+## Deleting a Docker Image
+```
+docker rmi hello-world:latest 
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>docker rmi hello-world:latest</b>
+Untagged: hello-world:latest
+Untagged: hello-world@sha256:13e367d31ae85359f42d637adf6da428f76d75dc9afeb3c21faea0d976f5c651
+Untagged: hello-world@sha256:aa0cc8055b82dc2509bed2e19b275c8f463506616377219d9642221ab53cf9fe
+Deleted: sha256:feb5d9fea6a5e9606aa995e879d862b825965ba48de054caab5ef356dc6b3412
+Deleted: sha256:e07ee1baac5fae6a26f30cabfe54a36d3402f96afda318fe0a96cec4ca393359
+</pre>
