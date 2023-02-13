@@ -86,6 +86,9 @@
 ## Docker High Level Architecture
 ![Docker High Level Architecture](DockerHighLevelArchitecture.png)
 
+## Docker Image Layers and Containers
+![Docker Image Layers](DockerLayers.png)
+
 ## What is a Container Orchestration Platform?
 Examples
 1. Docker SWARM
