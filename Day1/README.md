@@ -79,3 +79,33 @@
 - Example
   - Docker
   - Podman
+
+## What is a Container Orchestration Platform?
+Examples
+1. Docker SWARM
+2. Google Kubernetes
+3. Red Hat OpenShift
+
+Common Features supported by any Container Orchestration Platform
+1. Manages containerized application taking help of Container Engines/Runtimes
+2. In built monitoring features 
+   - checks the health of each containerized applications and repairs then if they are found unhealthy
+   - check if the containerized application is live, ie is it responding to user request if not it will be replaced with another healthy live instance of the same containerized application
+3. High Availability (HA)
+   - it ensures, the desired number of application instances are always running
+   - whenever the Orchestration plaform finds either less number of instances running or more than the desired number of application instances are running, it ensure the desired instances matches with the actual number of instances
+4. Supports Service abstraction
+   - Service represents a group of load-balanced application instances of same type
+   - End-user application that needs let's say mysql db server, they will access the mysql db instance via Service
+   - each service has a name and IP address
+6. Supports Service Discovery
+   - nothing but accessing the Service by its name
+   - Orchestration Platforms support DNS - Domain Naming Server 
+     - translates the name of the service to its corresponding IP address
+7. Scale up/down 
+   - Whenever the traffic to your web applications/microservices increase, you may scale up the number of application instance to handle the user traffic with less response time
+   - Whenever the traffic to your web applications/microservices decrease, you may scale down the number of application instances
+8. Rolling update
+   - assume you have alreay deployed some microservice whose version is 1.0, if you wish to deploy v2.0 without any down time, you can use the rolling update feature of the Orchestration Platform
+   - support rollback
+ 
