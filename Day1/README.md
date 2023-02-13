@@ -237,3 +237,47 @@ For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 
 </pre>
+
+## Creating a container in foreground mode
+```
+docker run -it --name ubuntu1 --hostname ubuntu1 ubuntu:16.04 /bin/bash
+hostname
+hostname -i
+exit
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ docker run -it --name ubuntu1 --hostname ubuntu1 ubuntu:16.04 /bin/bash
+root@ubuntu1:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@ubuntu1:/# hostname
+ubuntu1
+root@ubuntu1:/# hostname -i
+172.17.0.2
+root@ubuntu1:/# exit
+exit
+(jegan@tektutor.org)$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+(jegan@tektutor.org)$ docker ps -a
+CONTAINER ID   IMAGE                COMMAND       CREATED              STATUS                      PORTS     NAMES
+b55d68fe6067   ubuntu:16.04         "/bin/bash"   About a minute ago   Exited (0) 18 seconds ago             ubuntu1
+85cf735ebd09   hello-world:latest   "/hello"      9 minutes ago        Exited (0) 9 minutes ago              hello-container
+</pre>
+
+
+## Creating a container in the background mode
+```
+docker run -dit --name ubuntu3-jegan --hostname ubuntu3-jegan ubuntu:16.04 /bin/bash
+docker ps
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ docker run -dit --name ubuntu3-jegan --hostname ubuntu3-jegan ubuntu:16.04 /bin/bash
+fd14cd18668d5ff26318fa01d0950e43060e3771c0e0234e25ef5a9fdaa47334
+(jegan@tektutor.org)$ docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS          PORTS     NAMES
+fd14cd18668d   ubuntu:16.04   "/bin/bash"   15 seconds ago   Up 13 seconds             ubuntu3-jegan
+
+</pre>
