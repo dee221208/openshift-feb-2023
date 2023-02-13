@@ -189,3 +189,18 @@ WARNING: API is accessible on http://0.0.0.0:4243 without encryption.
          more information: https://docs.docker.com/go/attack-surface/
 WARNING: No swap limit support
 </pre>
+
+## Downloading a docker image from Docker Hub Remote Registry to your Local Docker Registry
+```
+docker pull hello-world
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ docker pull hello-world
+Using default tag: latest
+latest: Pulling from library/hello-world
+Digest: sha256:aa0cc8055b82dc2509bed2e19b275c8f463506616377219d9642221ab53cf9fe
+Status: Image is up to date for hello-world:latest
+docker.io/library/hello-world:latest
+</pre>
