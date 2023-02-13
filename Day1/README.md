@@ -279,5 +279,37 @@ fd14cd18668d5ff26318fa01d0950e43060e3771c0e0234e25ef5a9fdaa47334
 (jegan@tektutor.org)$ docker ps
 CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS          PORTS     NAMES
 fd14cd18668d   ubuntu:16.04   "/bin/bash"   15 seconds ago   Up 13 seconds             ubuntu3-jegan
+</pre>
 
+## Deleting containers
+
+We won't be able to delete a running container, we must first stop or remove it forcibly
+```
+docker rm ubuntu3-jegan
+docker stop ubuntu3-jegan
+docker rm ubuntu3-jegan
+docker rm ubuntu2-jegan ubuntu1 hello-container
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ docker rm ubuntu3-jegan
+Error response from daemon: You cannot remove a running container fd14cd18668d5ff26318fa01d0950e43060e3771c0e0234e25ef5a9fdaa47334. Stop the container before attempting removal or force remove
+(jegan@tektutor.org)$ docker stop ubuntu3-jegan 
+ubuntu3-jegan
+(jegan@tektutor.org)$ docker rm ubuntu3-jegan
+ubuntu3-jegan
+(jegan@tektutor.org)$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+(jegan@tektutor.org)$ docker ps -a
+CONTAINER ID   IMAGE                COMMAND       CREATED          STATUS                      PORTS     NAMES
+9e0d4ff28bd9   ubuntu:16.04         "/bin/bash"   20 minutes ago   Exited (0) 20 minutes ago             ubuntu2-jegan
+b55d68fe6067   ubuntu:16.04         "/bin/bash"   28 minutes ago   Exited (0) 27 minutes ago             ubuntu1
+85cf735ebd09   hello-world:latest   "/hello"      37 minutes ago   Exited (0) 37 minutes ago             hello-container
+(jegan@tektutor.org)$ docker rm ubuntu2-jegan ubuntu1 hello-container 
+ubuntu2-jegan
+ubuntu1
+hello-container
+(jegan@tektutor.org)$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 </pre>
