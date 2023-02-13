@@ -27,5 +27,29 @@
 
 ## What is Application Virtualization?
 - Container technology
-
+- each container represents one single application
+- each container, runs in its namespace
+- every container has its own dedicated Network Stack and Virtual Network Card, hence an IP is allocated for each container
+- every container get a file system 
+- When Docker for Windows is installed it installs a thin-linux layer which has the Linux Kernel
+- When Docker for Mac is installed, it installs a thin-linux layer which has the Linux Kernel
+- in Linux Host OS, we can only run Linux containerized application as we have only Linux Kernel
+- in Windows Host OS, we can run both Windows containerized applications as well Linux containerized applications
+ 
 ## Docker Overview
+- developed by Docker Inc organization in Go Programming language
+- it comes in two flavours
+  - Docker Community Edition(CE) - you get opensource Docker Images with limited officially certied Docker images
+  - Docker Enterprise Edition(EE) - you get officially certified Docker Images, you get support from Docker Inc
+- follows client/server architecture
+  Client - docker utility
+  Server - dockerd or Daemon which runs as a Daemon service
+
+## What is a Docker Image?
+- specification of a Docker Container
+- the software tools required on a container can be installed on the Docker Image
+- Using Docker Image, we can create any number of Containers
+
+## What is a Docker Container?
+- an instance of Docker Image
+- each running container, get atleast one IP address as container may have more than one Network Interface Cards (NIC)
