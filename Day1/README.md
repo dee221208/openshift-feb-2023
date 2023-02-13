@@ -744,6 +744,9 @@ exit
 
 ## ⛹️‍♂️ Lab - Creating a nginx Load Balancer and add 3 nginx web server behind the Load Balancer
 
+Once we complete this lab exercise, you would have a LB setup something like shown below
+![Nginx Load Balancer](LoadBalancer.png)
+
 Let's create 3 nginx web servers
 ```
 docker run -d --name nginx1 --hostname nginx1 nginx:1.18
