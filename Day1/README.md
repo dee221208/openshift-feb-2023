@@ -399,3 +399,31 @@ CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS         PORT
 6f36c93c3112   ubuntu:16.04   "/bin/bash"   10 minutes ago   Up 6 minutes             ubuntu2-jegan
 87c657e68268   ubuntu:16.04   "/bin/bash"   10 minutes ago   Up 7 minutes             ubuntu1-jegan
 </pre>
+
+## Deleting multiple running containers in a generic fashion without using their names
+```
+docker rm -f $(docker ps -q)
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS              PORTS     NAMES
+60c3967215f7   ubuntu:16.04   "/bin/bash"   11 minutes ago   Up About a minute             ubuntu3-jegan
+6f36c93c3112   ubuntu:16.04   "/bin/bash"   12 minutes ago   Up 8 minutes                  ubuntu2-jegan
+87c657e68268   ubuntu:16.04   "/bin/bash"   12 minutes ago   Up 9 minutes                  ubuntu1-jegan
+(jegan@tektutor.org)$ docker ps -q
+60c3967215f7
+6f36c93c3112
+87c657e68268
+(jegan@tektutor.org)$ docker rm -f $(docker ps -q)
+60c3967215f7
+6f36c93c3112
+87c657e68268
+</pre>
+
+
+## Deleting multiple running containers in a generic fashion without using their names
+```
+docker rm -f $(docker ps -aq)
+```
