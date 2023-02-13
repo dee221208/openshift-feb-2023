@@ -769,3 +769,80 @@ e8fab50a4aa7   nginx:1.18   "/docker-entrypoint.…"   1 second ago     Up 1 sec
 83a6681675f9   nginx:1.18   "/docker-entrypoint.…"   7 seconds ago    Up 6 seconds    80/tcp    nginx2
 0e44921a7a8c   nginx:1.18   "/docker-entrypoint.…"   12 seconds ago   Up 12 seconds   80/tcp    nginx1
 </pre>
+
+Let's create a loadbalancer container
+```
+docker run -d --name lb --hostname lb nginx:1.18
+docker ps
+```
+
+Let's find the IP Address of nginx1, nginx2 and nginx3 web server containers
+```
+docker inspect nginx1 | grep IPA
+docker inspect nginx2 | grep IPA
+docker inspect nginx3 | grep IPA
+```
+
+Let's create a nginx.conf load balancer configuration with the below content
+```
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /var/run/nginx.pid;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    upstream servers {
+        server  172.17.0.2:80;
+        server  172.17.0.3:80;
+        server  172.17.0.4:80;
+    }
+
+    server {
+        location / {
+            proxy_pass http://servers;
+        }
+    }
+}
+```
+
+In the above file, 
+<pre>
+172.17.0.2 - IP address of nginx1 web server
+172.17.0.3 - IP address of nginx2 web server
+172.17.0.4 - IP address of nginx3 web server
+</pre>
+
+Now let's copy this nginx.conf file into the lb container
+```
+docker cp nginx.conf lb:/etc/nginx/nginf.conf
+docker restart lb
+docker ps
+```
+
+Now, let's customize the html pages in nginx1, nginx2 and nginx3 web server containers
+```
+echo "Server 1" > index.html
+docker cp index.html nginx1:/usr/share/nginx/html/index.html
+echo "Server 2" > index.html
+docker cp index.html nginx2:/usr/share/nginx/html/index.html
+echo "Server 3" > index.html
+docker cp index.html nginx3:/usr/share/nginx/html/index.html
+```
+
+Find the IP address of lb container
+```
+docker inspect -f {{.NetworkSettings.IPAddress}} lb
+```
+
+Access the lb to see the round-robin response coming from nginx1, nginx2 and nginx3
+```
+curl 172.17.0.5
+curl 172.17.0.5
+curl 172.17.0.5
+```
+In the above command, 172.17.0.5 is the IP address of the lb container.
