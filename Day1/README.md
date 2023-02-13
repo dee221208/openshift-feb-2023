@@ -376,3 +376,26 @@ CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS         PORTS
 6f36c93c3112   ubuntu:16.04   "/bin/bash"   3 minutes ago   Up 2 seconds             ubuntu2-jegan
 87c657e68268   ubuntu:16.04   "/bin/bash"   3 minutes ago   Up 9 seconds             ubuntu1-jegan
 </pre>
+
+## Restarting containers
+```
+docker ps
+docker restart ubuntu3-jegan
+docker ps
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS          PORTS     NAMES
+60c3967215f7   ubuntu:16.04   "/bin/bash"   9 minutes ago    Up 15 seconds             ubuntu3-jegan
+6f36c93c3112   ubuntu:16.04   "/bin/bash"   9 minutes ago    Up 6 minutes              ubuntu2-jegan
+87c657e68268   ubuntu:16.04   "/bin/bash"   10 minutes ago   Up 6 minutes              ubuntu1-jegan
+(jegan@tektutor.org)$ docker restart ubuntu3-jegan
+ubuntu3-jegan
+(jegan@tektutor.org)$ docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS         PORTS     NAMES
+60c3967215f7   ubuntu:16.04   "/bin/bash"   9 minutes ago    Up 1 second              ubuntu3-jegan
+6f36c93c3112   ubuntu:16.04   "/bin/bash"   10 minutes ago   Up 6 minutes             ubuntu2-jegan
+87c657e68268   ubuntu:16.04   "/bin/bash"   10 minutes ago   Up 7 minutes             ubuntu1-jegan
+</pre>
