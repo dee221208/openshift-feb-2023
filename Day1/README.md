@@ -828,7 +828,7 @@ In the above file,
 
 Now let's copy this nginx.conf file into the lb container
 ```
-docker cp nginx.conf lb:/etc/nginx/nginf.conf
+docker cp nginx.conf lb:/etc/nginx/nginx.conf
 docker restart lb
 docker ps
 ```
