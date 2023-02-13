@@ -435,6 +435,10 @@ docker run -dit --name ubuntu1 --hostname ubuntu1 ubuntu:16.04 /bin/bash
 docker inspect ubuntu1
 docker inspect ubuntu1 | grep IPA
 docker inspect -f {{.NetworkSettings.IPAddress}} ubuntu1
+
+docker ps
+docker exec -it ubuntu1 /bin/bash
+exit
 ```
 
 Expected output
@@ -648,4 +652,15 @@ CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS        PORTS 
                     "IPAddress": "172.17.0.2",
 (jegan@tektutor.org)$ docker inspect -f {{.NetworkSettings.IPAddress}} ubuntu1
 172.17.0.2
+
+(jegan@tektutor.org)$ docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS         PORTS     NAMES
+269258334fb9   ubuntu:16.04   "/bin/bash"   2 minutes ago   Up 2 minutes             ubuntu1
+(jegan@tektutor.org)$ docker exec -it ubuntu1 /bin/bash
+root@ubuntu1:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@ubuntu1:/# hostname -i
+172.17.0.2
+root@ubuntu1:/# exit
+exit
 </pre>
