@@ -681,3 +681,57 @@ Untagged: hello-world@sha256:aa0cc8055b82dc2509bed2e19b275c8f463506616377219d964
 Deleted: sha256:feb5d9fea6a5e9606aa995e879d862b825965ba48de054caab5ef356dc6b3412
 Deleted: sha256:e07ee1baac5fae6a26f30cabfe54a36d3402f96afda318fe0a96cec4ca393359
 </pre>
+
+## Copying files from local system to container and container to local system
+```
+cd ~/openshift-feb-2023
+git pull
+
+cd Day1
+ls
+docker cp README.md ubuntu1:/readme
+docker exec -it ubuntu1 bash
+ls
+exit
+ls
+docker cp ubuntu1:/etc/fstab .
+ls
+```
+
+Expected output
+<pre>
+jegan@tektutor.org)$ ls
+CustomDockerImage  README.md
+(jegan@tektutor.org)$ docker cp README.md ubuntu1:/readme
+(jegan@tektutor.org)$ docker exec -it ubuntu1 bash
+root@ubuntu1:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  readme  root  run  sbin  srv  sys  tmp  usr  var
+root@ubuntu1:/# cat readme 
+# Day1
+root@ubuntu1:/# exit
+exit
+(jegan@tektutor.org)$ ls
+CustomDockerImage  README.md
+(jegan@tektutor.org)$ docker exec -it ubuntu1 bash
+root@ubuntu1:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  readme  root  run  sbin  srv  sys  tmp  usr  var
+root@ubuntu1:/# cd etc
+root@ubuntu1:/etc# ls
+X11                     debian_version  hosts           ld.so.conf.d    nsswitch.conf  rc3.d        skel
+adduser.conf            default         init            legal           opt            rc4.d        subgid
+alternatives            deluser.conf    init.d          libaudit.conf   os-release     rc5.d        subuid
+apt                     dhcp            inputrc         localtime       pam.conf       rc6.d        sysctl.conf
+bash.bashrc             dpkg            insserv         login.defs      pam.d          rcS.d        sysctl.d
+bash_completion.d       environment     insserv.conf    logrotate.d     passwd         resolv.conf  systemd
+bindresvport.blacklist  fstab           insserv.conf.d  lsb-release     profile        rmt          terminfo
+binfmt.d                gai.conf        issue           machine-id      profile.d      securetty    timezone
+cron.daily              group           issue.net       mke2fs.conf     rc.local       security     tmpfiles.d
+cron.weekly             gshadow         kernel          modules-load.d  rc0.d          selinux      udev
+dbus-1                  host.conf       ld.so.cache     mtab            rc1.d          shadow       update-motd.d
+debconf.conf            hostname        ld.so.conf      networks        rc2.d          shells       xdg
+root@ubuntu1:/etc# exit
+exit
+(jegan@tektutor.org)$ docker cp ubuntu1:/etc/fstab .
+(jegan@tektutor.org)$ ls
+CustomDockerImage  fstab  README.md
+</pre>
