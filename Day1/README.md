@@ -438,6 +438,7 @@ docker inspect -f {{.NetworkSettings.IPAddress}} ubuntu1
 
 docker ps
 docker exec -it ubuntu1 /bin/bash
+hostname -i
 exit
 ```
 
