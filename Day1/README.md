@@ -80,6 +80,9 @@
   - Docker
   - Podman
 
+## Docker High Level Architecture
+![Docker High Level Architecture](DockerHighLevelArchitecture.png)
+
 ## What is a Container Orchestration Platform?
 Examples
 1. Docker SWARM
