@@ -86,7 +86,7 @@ Examples
 2. Google Kubernetes
 3. Red Hat OpenShift
 
-Common Features supported by any Container Orchestration Platform
+### Common Features supported by any Container Orchestration Platform
 1. Manages containerized application taking help of Container Engines/Runtimes
 2. In built monitoring features 
    - checks the health of each containerized applications and repairs then if they are found unhealthy
@@ -109,3 +109,83 @@ Common Features supported by any Container Orchestration Platform
    - assume you have alreay deployed some microservice whose version is 1.0, if you wish to deploy v2.0 without any down time, you can use the rolling update feature of the Orchestration Platform
    - support rollback
  
+
+# Docker Commands
+
+## Finding the docker version
+```
+docker --version
+```
+
+## Listing the Docker images
+```
+docker images
+```
+
+## Finding more detailed information about your docker installation
+```
+docker info
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ docker info
+Client:
+ Context:    default
+ Debug Mode: false
+
+Server:
+ Containers: 6
+  Running: 4
+  Paused: 0
+  Stopped: 2
+ Images: 116
+ Server Version: 20.10.7
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: cgroupfs
+ Cgroup Version: 1
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 io.containerd.runtime.v1.linux runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 
+ runc version: 
+ init version: 
+ Security Options:
+  apparmor
+  seccomp
+   Profile: default
+ Kernel Version: 5.4.0-120-generic
+ Operating System: Ubuntu 18.04.6 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 48
+ Total Memory: 125.6GiB
+ Name: tektutor.org
+ ID: I3XQ:RESC:AIUK:6RVT:T34U:3CP5:GHLH:QWET:J52D:UV3O:G5B6:3WGE
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Username: tektutor
+ Registry: https://index.docker.io/v1/
+ Labels:
+ Experimental: false
+ Insecure Registries:
+  image-registry-openshift-imclearage-registry.apps.ocp.tektutor.org
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+WARNING: API is accessible on http://0.0.0.0:4243 without encryption.
+         Access to the remote API is equivalent to root access on the host. Refer
+         to the 'Docker daemon attack surface' section in the documentation for
+         more information: https://docs.docker.com/go/attack-surface/
+WARNING: No swap limit support
+</pre>
