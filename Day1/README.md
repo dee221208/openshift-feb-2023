@@ -60,3 +60,22 @@
   - Local Docker Registry ( /var/lib/docker folder on your system where Docker is installed )
   - Remote Docker Registry - Docker Hub (Web portal) that has many opensource Docker Images
   - Private Docker Registry - Optional ( can be setup using Sonatype Nexus, JFrog Artifactory, for learning or R&D purpose you could also use the registry:2 Docker Image from Docker Hub
+
+## What is Container Runtime?
+- this is the software utility that manages the containers
+  - creating container
+  - start/stop/restart/abort/kill/delete containers
+  - are normally used only by Container Engine
+ - Example
+   - runC - used by Docker Container Engine
+   - CRI-O - used by Podman Container Engine
+
+## What is Container Engine?
+- this a high-level software used by end-users like us
+- Container Engines dependes on Container Runtimes to manage containers
+- Container Engines also depends on other tools to manage Container Images
+- Container Engines provide easy-to-use user-friendly commands 
+- Without knowing lowel-level container internals, we can manage container images/containers using this tool
+- Example
+  - Docker
+  - Podman
