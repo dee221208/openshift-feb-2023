@@ -53,3 +53,10 @@
 ## What is a Docker Container?
 - an instance of Docker Image
 - each running container, get atleast one IP address as container may have more than one Network Interface Cards (NIC)
+
+## What is a Docker Container Registry?
+- this is where Docker Images are hosted
+- three types of Docker Registry
+  - Local Docker Registry ( /var/lib/docker folder on your system where Docker is installed )
+  - Remote Docker Registry - Docker Hub (Web portal) that has many opensource Docker Images
+  - Private Docker Registry - Optional ( can be setup using Sonatype Nexus, JFrog Artifactory, for learning or R&D purpose you could also use the registry:2 Docker Image from Docker Hub
