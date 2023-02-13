@@ -736,6 +736,12 @@ exit
 CustomDockerImage  fstab  README.md
 </pre>
 
+## Getting inside a container that is running in background
+```
+docker exec -it ubuntu1 /bin/bash
+exit
+```
+
 ## ⛹️‍♂️ Lab - Creating a nginx Load Balancer and add 3 nginx web server behind the Load Balancer
 
 Let's create 3 nginx web servers
