@@ -735,3 +735,37 @@ exit
 (jegan@tektutor.org)$ ls
 CustomDockerImage  fstab  README.md
 </pre>
+
+## Lab - Creating a nginx Load Balancer and add 3 nginx web server behind the Load Balancer
+
+Let's create 3 nginx web servers
+```
+docker run -d --name nginx1 --hostname nginx1 nginx:1.18
+docker run -d --name nginx2 --hostname nginx2 nginx:1.18
+docker run -d --name nginx3 --hostname nginx3 nginx:1.18
+docker ps
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ docker run -d --name nginx1 --hostname nginx1 nginx:1.18 
+Unable to find image 'nginx:1.18' locally
+1.18: Pulling from library/nginx
+f7ec5a41d630: Pull complete 
+0b20d28b5eb3: Pull complete 
+1576642c9776: Pull complete 
+c12a848bad84: Pull complete 
+03f221d9cf00: Pull complete 
+Digest: sha256:e90ac5331fe095cea01b121a3627174b2e33e06e83720e9a934c7b8ccc9c55a0
+Status: Downloaded newer image for nginx:1.18
+0e44921a7a8cb4b654918489bcca1284ebeb5fefa0c05a3a5b6ba83bb4a677ac
+(jegan@tektutor.org)$ docker run -d --name nginx2 --hostname nginx2 nginx:1.18 
+83a6681675f932d531b2765c691056bdbd82a991e177e5e4c868bd6164a68a97
+^[[A(jegan@tektutor.org)$ docker run -d --name nginx3 --hostname nginx3 nginx:1.18 
+e8fab50a4aa7486736d40145982710d0e6e44d1690553809dfe226ba1644df16
+(jegan@tektutor.org)$ docker ps
+CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS          PORTS     NAMES
+e8fab50a4aa7   nginx:1.18   "/docker-entrypoint.…"   1 second ago     Up 1 second     80/tcp    nginx3
+83a6681675f9   nginx:1.18   "/docker-entrypoint.…"   7 seconds ago    Up 6 seconds    80/tcp    nginx2
+0e44921a7a8c   nginx:1.18   "/docker-entrypoint.…"   12 seconds ago   Up 12 seconds   80/tcp    nginx1
+</pre>
