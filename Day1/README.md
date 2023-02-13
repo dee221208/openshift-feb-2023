@@ -736,7 +736,7 @@ exit
 CustomDockerImage  fstab  README.md
 </pre>
 
-## Lab - Creating a nginx Load Balancer and add 3 nginx web server behind the Load Balancer
+## ⛹️‍♂️ Lab - Creating a nginx Load Balancer and add 3 nginx web server behind the Load Balancer
 
 Let's create 3 nginx web servers
 ```
