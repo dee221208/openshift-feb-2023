@@ -313,3 +313,36 @@ hello-container
 (jegan@tektutor.org)$ docker ps -a
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 </pre>
+
+
+## Stopping containers
+```
+docker run -dit --name ubuntu1-jegan --hostname ubuntu1-jegan ubuntu:16.04 /bin/bash
+docker run -dit --name ubuntu2-jegan --hostname ubuntu2-jegan ubuntu:16.04 /bin/bash
+docker run -dit --name ubuntu3-jegan --hostname ubuntu3-jegan ubuntu:16.04 /bin/bash
+docker ps
+docker stop ubuntu1-jegan
+docker stop ubuntu2-jegan ubuntu3-jegan
+```
+
+Expected output
+<pre>
+jegan@tektutor.org)$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+(jegan@tektutor.org)$ docker run -dit --name ubuntu1-jegan --hostname ubuntu1-jegan ubuntu:16.04 /bin/bash
+87c657e68268bcea28c28279c44de91186a7b662b59bd75d2254ea21bd1e0c17
+(jegan@tektutor.org)$ docker run -dit --name ubuntu2-jegan --hostname ubuntu2-jegan ubuntu:16.04 /bin/bash
+6f36c93c3112bd78d9df460411f31f1e2c9f93ddd2a4f2e6f762d55c0167889c
+(jegan@tektutor.org)$ docker run -dit --name ubuntu3-jegan --hostname ubuntu3-jegan ubuntu:16.04 /bin/bash
+60c3967215f749f59ec9bb43d9ecf0186ec249561b4f025d78ae7752bfab871d
+(jegan@tektutor.org)$ docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS          PORTS     NAMES
+60c3967215f7   ubuntu:16.04   "/bin/bash"   3 seconds ago    Up 2 seconds              ubuntu3-jegan
+6f36c93c3112   ubuntu:16.04   "/bin/bash"   10 seconds ago   Up 9 seconds              ubuntu2-jegan
+87c657e68268   ubuntu:16.04   "/bin/bash"   16 seconds ago   Up 16 seconds             ubuntu1-jegan
+(jegan@tektutor.org)$ docker stop ubuntu1-jegan
+ubuntu1-jegan
+(jegan@tektutor.org)$ docker stop ubuntu2-jegan ubuntu3-jegan
+ubuntu2-jegan
+ubuntu3-jegan
+</pre>
