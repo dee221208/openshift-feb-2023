@@ -1133,13 +1133,16 @@ exit
 
 ## Lab - Creating a LoadBalancer external service
 
-If you are interested in knowing how to setup metallb load balancer in OpenShift cluster, you may follow my medium blog here 
+Metallb Operator is already installed on Your OpenShift cluster, hence you can skip the medium blog instructions.
+
+
+If you wish to do the setup at home, you may follow this in your home lab.
 <pre>
 https://medium.com/tektutor/using-metallb-loadbalancer-with-bare-metal-openshift-onprem-4230944bfa35
 </pre>
 
 
-Assuming, we already have metallb operator installed and configured
+Assuming, we already have metallb operator installed and configured. You can try the below in your RPS cloud
 ```
 oc delete svc/nginx
 
