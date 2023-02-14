@@ -896,11 +896,25 @@ Service Discovery only works within the Cluster irrespective of the Service type
 
 
 ## Lab - Creating an external NodePort service for nginx deployment
+
+Kubernetes/OpenShift has reserver 30000 to 32767 ports for NodePort services.
+
 ```
 oc delete svc/nginx
 oc expose deploy/nginx --type=NodePort --port=8080
 oc get svc
 oc describe svc/nginx
+
+curl <node-ip>:<node-port>
+
+curl 192.168.122.176:30401
+curl 192.168.122.56:30401
+curl 192.168.122.76:30401
+curl 192.168.122.113:30401
+curl 192.168.122.59:30401
+
+oc rsh deploy/hello
+curl http://nginx:8080
 ```
 
 Expected output
