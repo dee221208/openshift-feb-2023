@@ -123,6 +123,27 @@
 
 # OpenShift Command Reference
 
+## Finding the openshift version
+```
+oc version
+kubectl version
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc version
+Client Version: 4.12.2
+Kustomize Version: v4.5.7
+Server Version: 4.12.2
+Kubernetes Version: v1.25.4+a34b9e9
+
+(jegan@tektutor.org)$ kubectl version
+WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
+Client Version: version.Info{Major:"1", Minor:"25", GitVersion:"v1.25.2", GitCommit:"b05f7d40f9a2dac30771be620e9e9148d26ffd07", GitTreeState:"clean", BuildDate:"2023-01-31T16:04:34Z", GoVersion:"go1.19.4", Compiler:"gc", Platform:"linux/amd64"}
+Kustomize Version: v4.5.7
+Server Version: version.Info{Major:"1", Minor:"25", GitVersion:"v1.25.4+a34b9e9", GitCommit:"b6d1f054747e9886f61dd85316deac3415e2726f", GitTreeState:"clean", BuildDate:"2023-01-10T15:55:28Z", GoVersion:"go1.19.4", Compiler:"gc", Platform:"linux/amd64"}
+</pre>
+
 ## Listing OpenShift Cluster nodes
 ```
 oc get nodes
