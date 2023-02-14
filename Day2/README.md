@@ -422,6 +422,18 @@ When we issue the above command, the following things happen with the OpenShift 
 14. Kubelet monitors the status of the Pod and periodically keeps reporting the status of all the Pods that are running on the node where Kubelet is running like a heart-beat notification.
 </pre>
 
+
+## Scaling up/down
+- Increasing/Decreasing the Pod count
+- When the user traffic increase, we do scale up i.e add more Pods to handle the traffic quickly and efficiently
+- When the user traffic decrease, we do scale down ie. delete some Pods
+- supported by ReplicaSet Controller
+
+## Rolling update
+- helps in upgrading your already deployed application from one version to another version without any downtime
+- also supports rolling back to previous or any particular version
+- supported by Deployment Controller
+
 ## Deleting a deployment
 ```
 oc delete deploy/nginx
@@ -435,3 +447,5 @@ deployment.apps "nginx" deleted
 (jegan@tektutor.org)$ oc get deploy,rs,po
 No resources found in default namespace.
 </pre>
+
+
