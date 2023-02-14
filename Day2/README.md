@@ -774,9 +774,12 @@ nginx-7fc97856d6-zx2v8   1/1     Running   0          25s   10.129.0.93    maste
 
 
 ## Lab - Testing if you are able to access the Web page from an nginx Pod
+
+The below command is a blocking command, so you may have to use another terminal if you prefer curl or once you tested with web browser you can come back to the same terminal and press Ctrl + C
 ```
 oc port-forward nginx-7fc97856d6-77z48 8080:8080
 ```
+
 
 Expected output
 <pre>
