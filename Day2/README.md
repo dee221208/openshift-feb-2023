@@ -897,6 +897,10 @@ Service Discovery only works within the Cluster irrespective of the Service type
 
 ## Lab - Creating an external NodePort service for nginx deployment
 ```
+oc delete svc/nginx
+oc expose deploy/nginx --type=NodePort --port=8080
+oc get svc
+oc describe svc/nginx
 ```
 
 Expected output
