@@ -138,6 +138,7 @@ master-2.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25
 master-3.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9
 worker-1.ocp.tektutor.org   Ready    worker                        3d20h   v1.25.4+a34b9e9
 worker-2.ocp.tektutor.org   Ready    worker                        3d20h   v1.25.4+a34b9e9
+
 (jegan@tektutor.org)$ kubectl get nodes
 NAME                        STATUS   ROLES                         AGE     VERSION
 master-1.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9
@@ -146,4 +147,28 @@ master-3.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25
 worker-1.ocp.tektutor.org   Ready    worker                        3d20h   v1.25.4+a34b9e9
 worker-2.ocp.tektutor.org   Ready    worker                        3d20h   v1.25.4+a34b9e9
 
+</pre>
+
+## Listing the nodes in wider format
+```
+oc get nodes -o wide
+kubectl get nodes -o wide
+```
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc get nodes -o wide
+NAME                        STATUS   ROLES                         AGE     VERSION           INTERNAL-IP       EXTERNAL-IP   OS-IMAGE                                                        KERNEL-VERSION                 CONTAINER-RUNTIME
+master-1.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9   192.168.122.59    <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+master-2.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9   192.168.122.113   <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+master-3.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9   192.168.122.76    <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+worker-1.ocp.tektutor.org   Ready    worker                        3d20h   v1.25.4+a34b9e9   192.168.122.56    <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+worker-2.ocp.tektutor.org   Ready    worker                        3d20h   v1.25.4+a34b9e9   192.168.122.176   <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+
+(jegan@tektutor.org)$ kubectl get nodes -o wide
+NAME                        STATUS   ROLES                         AGE     VERSION           INTERNAL-IP       EXTERNAL-IP   OS-IMAGE                                                        KERNEL-VERSION                 CONTAINER-RUNTIME
+master-1.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9   192.168.122.59    <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+master-2.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9   192.168.122.113   <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+master-3.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9   192.168.122.76    <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+worker-1.ocp.tektutor.org   Ready    worker                        3d20h   v1.25.4+a34b9e9   192.168.122.56    <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+worker-2.ocp.tektutor.org   Ready    worker                        3d20h   v1.25.4+a34b9e9   192.168.122.176   <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
 </pre>
