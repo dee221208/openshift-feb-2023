@@ -383,3 +383,43 @@ nginx-66664d749f-fggcz   1/1     Running   0          82s
 nginx-66664d749f-fz569   1/1     Running   0          82s
 nginx-66664d749f-wwq9m   1/1     Running   0          82s
 </pre>
+
+
+## What happens when you create a deployment?
+```
+oc create deploy nginx --image=bitnami/nginx:latest --replicas=3
+```
+
+When we issue the above command, the following things happen with the OpenShift cluster
+<pre>
+
+1. The oc client tool will make a REST API Call to API Server, requesting to create a deployment with bitnami/nginx image with 3 Pods.
+
+2. API Server receives the request, and it creates a Deployment database entry in the etcd database.
+
+3. API Server trigger an event something like "New Deployment" Created.
+
+4. Deployment receives the "New Deployment" created event, and then it will make a REST call to API Server requesting it to create a ReplicaSet with Desired count as 3 Pods.
+
+5. API Server receives the event, it then creates a ReplicaSet database entry in the etcd database.
+
+6. API Server tirggers an event something like "New ReplicaSet" created.
+
+7. ReplicaSet Controller receives the "New ReplicaSet" event, and then it fetches the desired count and then it will make a REST call to API Server requesting it to create 3 Pods.
+
+8. API Server receives the event and it creates 3 Pod database entries in the etcd database.
+
+9. API Server triggers an event something like "New Pod" created. This event is triggered for every Pod.
+
+10. Scheduler receives the "New Pod" created event and it identifies healthy node where those individual Pods can be deploymed.  Scheduler then makes a REST call to API Server sending its scheduling recommendations for every new Pod.
+
+11. API Server will retreive the Pod database entry from etcd and updates the scheduling info on the Pod entries stored in etcd.
+
+12. API Server triggers "Pod scheduled" events.
+
+13. Kubelet Container Agent running on respective nodes receive the "Pod Scheduled" event and it interacts with the Container Runtime to pull and deploy the containers for those Pods.
+
+14. Kubelet monitors the status of the Pod and periodically keeps reporting the status of all the Pods that are running on the node where Kubelet is running like a heart-beat notification.
+
+
+</pre>
