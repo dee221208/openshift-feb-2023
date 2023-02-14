@@ -755,3 +755,19 @@ Edit cancelled, no changes made.
 Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "nginx" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "nginx" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "nginx" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "nginx" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
 deployment.apps/nginx rolled back
 </pre>
+
+## Lab - Finding the IP Address of Pod(s)
+```
+oc get po -o wide
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc get po -o wide</b>
+NAME                     READY   STATUS    RESTARTS   AGE   IP             NODE                        NOMINATED NODE   READINESS GATES
+nginx-7fc97856d6-77z48   1/1     Running   0          25s   10.131.0.41    worker-2.ocp.tektutor.org   <none>           <none>
+nginx-7fc97856d6-fqspq   1/1     Running   0          25s   10.130.0.88    master-3.ocp.tektutor.org   <none>           <none>
+nginx-7fc97856d6-tq8x5   1/1     Running   0          25s   10.128.0.104   master-2.ocp.tektutor.org   <none>           <none>
+nginx-7fc97856d6-zqnkl   1/1     Running   0          17m   10.128.3.168   worker-1.ocp.tektutor.org   <none>           <none>
+nginx-7fc97856d6-zx2v8   1/1     Running   0          25s   10.129.0.93    master-1.ocp.tektutor.org   <none>           <none>
+</pre>
