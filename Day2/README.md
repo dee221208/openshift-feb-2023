@@ -420,6 +420,18 @@ When we issue the above command, the following things happen with the OpenShift 
 13. Kubelet Container Agent running on respective nodes receive the "Pod Scheduled" event and it interacts with the Container Runtime to pull and deploy the containers for those Pods.
 
 14. Kubelet monitors the status of the Pod and periodically keeps reporting the status of all the Pods that are running on the node where Kubelet is running like a heart-beat notification.
+</pre>
 
+## Deleting a deployment
+```
+oc delete deploy/nginx
+```
 
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc delete deploy nginx
+deployment.apps "nginx" deleted
+
+(jegan@tektutor.org)$ oc get deploy,rs,po
+No resources found in default namespace.
 </pre>
