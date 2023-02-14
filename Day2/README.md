@@ -448,4 +448,280 @@ deployment.apps "nginx" deleted
 No resources found in default namespace.
 </pre>
 
+## Lab - Scaling up the deployment
+```
+oc delete deploy/nginx
 
+oc create deploy/nginx --image=bitnami/nginx:1.18 --replicas=3
+oc get deploy,rs,po
+
+oc set image deploy/nginx nginx=bitnami/ngin:1.19
+```
+
+## Lab - Rolling update, rollback
+```
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc delete deploy/nginx
+deployment.apps "nginx" deleted
+(jegan@tektutor.org)$ oc get deploy,rs,po
+No resources found in jegan namespace.
+(jegan@tektutor.org)$ oc create deploy nginx --image=bitnami/nginx:1.18
+Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "nginx" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "nginx" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "nginx" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "nginx" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+deployment.apps/nginx created
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           5s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-7fc97856d6   1         1         1       5s
+
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/nginx-7fc97856d6-lh8qk   1/1     Running   0          5s
+(jegan@tektutor.org)$ oc set image deploy/nginx nginx=bitnami/nginx:1.19
+Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "nginx" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "nginx" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "nginx" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "nginx" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+deployment.apps/nginx image updated
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           34s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-7fc97856d6   0         0         0       34s
+replicaset.apps/nginx-86dfdd65c9   1         1         1       6s
+
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/nginx-86dfdd65c9-rw7b6   1/1     Running   0          5s
+(jegan@tektutor.org)$ oc set image deploy/nginx nginx=bitnami/nginx:1.20
+Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "nginx" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "nginx" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "nginx" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "nginx" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+deployment.apps/nginx image updated
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           68s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-7fc97856d6   0         0         0       68s
+replicaset.apps/nginx-865bc46655   1         1         0       2s
+replicaset.apps/nginx-86dfdd65c9   1         1         1       40s
+
+NAME                         READY   STATUS              RESTARTS   AGE
+pod/nginx-865bc46655-zrknc   0/1     ContainerCreating   0          2s
+pod/nginx-86dfdd65c9-rw7b6   1/1     Running             0          39s
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           87s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-7fc97856d6   0         0         0       87s
+replicaset.apps/nginx-865bc46655   1         1         1       21s
+replicaset.apps/nginx-86dfdd65c9   0         0         0       59s
+
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/nginx-865bc46655-zrknc   1/1     Running   0          21s
+(jegan@tektutor.org)$ oc set image deploy/nginx nginx=bitnami/nginx:1.21
+Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "nginx" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "nginx" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "nginx" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "nginx" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+deployment.apps/nginx image updated
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           96s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-7fc97856d6   0         0         0       96s
+replicaset.apps/nginx-865bc46655   1         1         1       30s
+replicaset.apps/nginx-86dfdd65c9   0         0         0       68s
+replicaset.apps/nginx-c95694c6b    1         1         0       2s
+
+NAME                         READY   STATUS              RESTARTS   AGE
+pod/nginx-865bc46655-zrknc   1/1     Running             0          30s
+pod/nginx-c95694c6b-625vk    0/1     ContainerCreating   0          2s
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           104s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-7fc97856d6   0         0         0       104s
+replicaset.apps/nginx-865bc46655   1         1         1       38s
+replicaset.apps/nginx-86dfdd65c9   0         0         0       76s
+replicaset.apps/nginx-c95694c6b    1         1         0       10s
+
+NAME                         READY   STATUS              RESTARTS   AGE
+pod/nginx-865bc46655-zrknc   1/1     Running             0          38s
+pod/nginx-c95694c6b-625vk    0/1     ContainerCreating   0          10s
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           105s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-7fc97856d6   0         0         0       105s
+replicaset.apps/nginx-865bc46655   1         1         1       39s
+replicaset.apps/nginx-86dfdd65c9   0         0         0       77s
+replicaset.apps/nginx-c95694c6b    1         1         0       11s
+
+NAME                         READY   STATUS              RESTARTS   AGE
+pod/nginx-865bc46655-zrknc   1/1     Running             0          39s
+pod/nginx-c95694c6b-625vk    0/1     ContainerCreating   0          11s
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           106s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-7fc97856d6   0         0         0       106s
+replicaset.apps/nginx-865bc46655   1         1         1       40s
+replicaset.apps/nginx-86dfdd65c9   0         0         0       78s
+replicaset.apps/nginx-c95694c6b    1         1         0       12s
+
+NAME                         READY   STATUS              RESTARTS   AGE
+pod/nginx-865bc46655-zrknc   1/1     Running             0          40s
+pod/nginx-c95694c6b-625vk    0/1     ContainerCreating   0          12s
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           107s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-7fc97856d6   0         0         0       107s
+replicaset.apps/nginx-865bc46655   1         1         1       41s
+replicaset.apps/nginx-86dfdd65c9   0         0         0       79s
+replicaset.apps/nginx-c95694c6b    1         1         0       13s
+
+NAME                         READY   STATUS              RESTARTS   AGE
+pod/nginx-865bc46655-zrknc   1/1     Running             0          41s
+pod/nginx-c95694c6b-625vk    0/1     ContainerCreating   0          13s
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           108s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-7fc97856d6   0         0         0       108s
+replicaset.apps/nginx-865bc46655   1         1         1       42s
+replicaset.apps/nginx-86dfdd65c9   0         0         0       80s
+replicaset.apps/nginx-c95694c6b    1         1         0       14s
+
+NAME                         READY   STATUS              RESTARTS   AGE
+pod/nginx-865bc46655-zrknc   1/1     Running             0          42s
+pod/nginx-c95694c6b-625vk    0/1     ContainerCreating   0          14s
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   2/1     1            2           109s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-7fc97856d6   0         0         0       109s
+replicaset.apps/nginx-865bc46655   0         1         1       43s
+replicaset.apps/nginx-86dfdd65c9   0         0         0       81s
+replicaset.apps/nginx-c95694c6b    1         1         1       15s
+
+NAME                         READY   STATUS        RESTARTS   AGE
+pod/nginx-865bc46655-zrknc   1/1     Terminating   0          43s
+pod/nginx-c95694c6b-625vk    1/1     Running       0          15s
+(jegan@tektutor.org)$ oc set image deploy/nginx nginx=bitnami/nginx:1.22
+Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "nginx" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "nginx" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "nginx" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "nginx" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+deployment.apps/nginx image updated
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           115s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-56f59c7849   1         1         0       2s
+replicaset.apps/nginx-7fc97856d6   0         0         0       115s
+replicaset.apps/nginx-865bc46655   0         0         0       49s
+replicaset.apps/nginx-86dfdd65c9   0         0         0       87s
+replicaset.apps/nginx-c95694c6b    1         1         1       21s
+
+NAME                         READY   STATUS              RESTARTS   AGE
+pod/nginx-56f59c7849-427ts   0/1     ContainerCreating   0          2s
+pod/nginx-c95694c6b-625vk    1/1     Running             0          21s
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           117s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-56f59c7849   1         1         0       4s
+replicaset.apps/nginx-7fc97856d6   0         0         0       117s
+replicaset.apps/nginx-865bc46655   0         0         0       51s
+replicaset.apps/nginx-86dfdd65c9   0         0         0       89s
+replicaset.apps/nginx-c95694c6b    1         1         1       23s
+
+NAME                         READY   STATUS              RESTARTS   AGE
+pod/nginx-56f59c7849-427ts   0/1     ContainerCreating   0          4s
+pod/nginx-c95694c6b-625vk    1/1     Running             0          23s
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           2m1s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-56f59c7849   1         1         0       8s
+replicaset.apps/nginx-7fc97856d6   0         0         0       2m1s
+replicaset.apps/nginx-865bc46655   0         0         0       55s
+replicaset.apps/nginx-86dfdd65c9   0         0         0       93s
+replicaset.apps/nginx-c95694c6b    1         1         1       27s
+
+NAME                         READY   STATUS              RESTARTS   AGE
+pod/nginx-56f59c7849-427ts   0/1     ContainerCreating   0          8s
+pod/nginx-c95694c6b-625vk    1/1     Running             0          27s
+(jegan@tektutor.org)$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/1     1            1           2m2s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-56f59c7849   1         1         0       9s
+replicaset.apps/nginx-7fc97856d6   0         0         0       2m2s
+replicaset.apps/nginx-865bc46655   0         0         0       56s
+replicaset.apps/nginx-86dfdd65c9   0         0         0       94s
+replicaset.apps/nginx-c95694c6b    1         1         1       28s
+
+NAME                         READY   STATUS              RESTARTS   AGE
+pod/nginx-56f59c7849-427ts   0/1     ContainerCreating   0          9s
+pod/nginx-c95694c6b-625vk    1/1     Running             0          28s
+(jegan@tektutor.org)$ oc get po -w
+NAME                     READY   STATUS        RESTARTS   AGE
+nginx-56f59c7849-427ts   1/1     Running       0          15s
+nginx-c95694c6b-625vk    1/1     Terminating   0          34s
+nginx-c95694c6b-625vk    0/1     Terminating   0          35s
+nginx-c95694c6b-625vk    0/1     Terminating   0          35s
+nginx-c95694c6b-625vk    0/1     Terminating   0          35s
+^C(jegan@tektutor.org)$ oc set image deploy/nginx nginx=bitnami/nginx:1.23
+Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "nginx" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "nginx" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "nginx" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "nginx" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+deployment.apps/nginx image updated
+(jegan@tektutor.org)$ oc get po -w
+NAME                     READY   STATUS              RESTARTS   AGE
+nginx-56f59c7849-427ts   1/1     Running             0          22s
+nginx-fdf6fcbd4-sjpch    0/1     ContainerCreating   0          1s
+nginx-fdf6fcbd4-sjpch    0/1     ContainerCreating   0          2s
+nginx-fdf6fcbd4-sjpch    1/1     Running             0          11s
+nginx-56f59c7849-427ts   1/1     Terminating         0          32s
+nginx-56f59c7849-427ts   0/1     Terminating         0          33s
+nginx-56f59c7849-427ts   0/1     Terminating         0          33s
+nginx-56f59c7849-427ts   0/1     Terminating         0          33s
+^C(jegan@tektutor.org)$ oc get po
+NAME                    READY   STATUS    RESTARTS   AGE
+nginx-fdf6fcbd4-sjpch   1/1     Running   0          16s
+(jegan@tektutor.org)$ oc get rs
+NAME               DESIRED   CURRENT   READY   AGE
+nginx-56f59c7849   0         0         0       41s
+nginx-7fc97856d6   0         0         0       2m34s
+nginx-865bc46655   0         0         0       88s
+nginx-86dfdd65c9   0         0         0       2m6s
+nginx-c95694c6b    0         0         0       60s
+nginx-fdf6fcbd4    1         1         1       20s
+(jegan@tektutor.org)$ oc set image deploy/nginx nginx=bitnami/nginx:1.23^C
+(jegan@tektutor.org)$ oc rollout history deploy/nginx
+deployment.apps/nginx 
+REVISION  CHANGE-CAUSE
+1         <none>
+2         <none>
+3         <none>
+4         <none>
+5         <none>
+6         <none>
+
+(jegan@tektutor.org)$ oc edit deploy/nginx
+Edit cancelled, no changes made.
+(jegan@tektutor.org)$ oc rollout undo deploy/nginx 
+Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "nginx" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "nginx" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "nginx" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "nginx" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+deployment.apps/nginx rolled back
+(jegan@tektutor.org)$ oc edit deploy/nginx
+Edit cancelled, no changes made.
+(jegan@tektutor.org)$ oc rollout undo deploy/nginx --to-revision=1
+Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "nginx" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "nginx" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "nginx" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "nginx" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+deployment.apps/nginx rolled back
+</pre>
