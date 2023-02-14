@@ -64,9 +64,59 @@
   - Kubernetes uses Controller to monitor and manage each type of Resources
   - Deployment Controller is the one that manages the Deployment
   - ReplicaSet Controller is the one that manages the ReplicaSet
+  - kubectl is the client tool used in Kubernetes to interact with the cluster
+
+## Kubernetes/OpenShift Control Plane Components
+1. API Server
+2. etcd database
+3. Scheduler
+4. Controller Manager(s)
+
+### API Server
+- all the Kubernetes Functionalities are implemented as REST APIs
+- API Server maintains the Cluster State and the application status in the etcd database
+- API Server is the only component that will access to etcd database
+- Whenever API Server updates/deletes/creates any database entry within etcd, it trigger an event
+- the event type would vary depending on What operation(Create, Delete, Update) and What resource is impacted
+- all the Kubernetes/Openshift components are allowed to talk to only API Server
+- ie. Scheduler is not allowed to talk to Controller managers or controller managers aren't allowed to communicate with other components
+- ie. all communication happens only via API Server
+
+### etcd
+- it is third-party opensource key/value datastore used by Kubenetes and OpenShift
+
+### Scheduler
+- this component is responsible to identify a health node where each new Pod can be deployed
+- Scheduler sends the Scheduling recommendations to the API Server via REST call
+
+### Controller Managers
+- it is a combination of many Controllers
+- each Controller manages a particular type of Resource
+- For example
+  - Deployment Controller is the one which monitors and manages the Deployment Resource
+  - ReplicaSet Controller is the one which monitors and manages the ReplicaSet Resource
+  - DaemonSet Controller manages DaemonSet Resource
+
+### Kube-proxy(DaemonSet)
+- this supports the load-balance of similar Pods
+- this runs in every nodes ie all master and worker nodes
+
+### Core DNS (DaemonSet)
+- this supports Service Discovery
+- this runs in every nodes ( master and Worker nodes )
+
 ## OpenShift Overview
 - is developed on top of Kubernetes
 - added many additional features on top of Kuberenetes
-
+- they have added many Custom Resources by definining many Custom Resource Definitions(CRDs)
+- to manage the Custom Resource, the OpenShift team also have added many Custom Controllers
 
 ## Kubernetes vs OpenShift
+- OpenShift is Red Hat's Distribution of Kubernetes
+- all the features of Kubernetes works in OpenShift
+- OpenShift has many additional features
+- Additional Features
+  - User Management
+  - Web Console and CLI
+  - supports Private Container Registry out of the box
+  - you get support from Red Hat ( an IBM company )
