@@ -913,6 +913,7 @@ curl 192.168.122.76:30401
 curl 192.168.122.113:30401
 curl 192.168.122.59:30401
 
+# Service Discovery -  accessing service by its name and service port
 oc rsh deploy/hello
 curl http://nginx:8080
 ```
