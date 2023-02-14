@@ -120,3 +120,30 @@
   - Web Console and CLI
   - supports Private Container Registry out of the box
   - you get support from Red Hat ( an IBM company )
+
+# OpenShift Command Reference
+
+## Listing OpenShift Cluster nodes
+```
+oc get nodes
+kubectl get nodes
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc get nodes
+NAME                        STATUS   ROLES                         AGE     VERSION
+master-1.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9
+master-2.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9
+master-3.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9
+worker-1.ocp.tektutor.org   Ready    worker                        3d20h   v1.25.4+a34b9e9
+worker-2.ocp.tektutor.org   Ready    worker                        3d20h   v1.25.4+a34b9e9
+(jegan@tektutor.org)$ kubectl get nodes
+NAME                        STATUS   ROLES                         AGE     VERSION
+master-1.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9
+master-2.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9
+master-3.ocp.tektutor.org   Ready    control-plane,master,worker   3d20h   v1.25.4+a34b9e9
+worker-1.ocp.tektutor.org   Ready    worker                        3d20h   v1.25.4+a34b9e9
+worker-2.ocp.tektutor.org   Ready    worker                        3d20h   v1.25.4+a34b9e9
+
+</pre>
