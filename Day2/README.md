@@ -892,4 +892,4 @@ In the above, nginx is the name of the ClusterIP service and port 8080 is the se
 
 Service Discovery is nothing but accessing a service using its name, the Core DNS in OpenShift helps resolve the name of the service into its corresponding IP address on the fly.
 
-Service Discovery only works within the Cluster irrespeactive of the Service type.
+Service Discovery only works within the Cluster irrespective of the Service type.
