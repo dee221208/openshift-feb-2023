@@ -743,7 +743,8 @@ REVISION  CHANGE-CAUSE
 
 (jegan@tektutor.org)$ <b>oc edit deploy/nginx</b>
 Edit cancelled, no changes made.
-(jegan@tektutor.org)$ oc rollout undo deploy/nginx 
+
+(jegan@tektutor.org)$ <b>oc rollout undo deploy/nginx</b>
 Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "nginx" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "nginx" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "nginx" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "nginx" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
 deployment.apps/nginx rolled back
 
