@@ -885,6 +885,7 @@ Open a shell inside the hello pod
 ```
 oc rsh deploy/hello
 curl http://nginx:8080
+exit
 ```
 
 In the above, nginx is the name of the ClusterIP service and port 8080 is the service port.
