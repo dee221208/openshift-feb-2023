@@ -322,3 +322,64 @@ Events:              <none>
 ```
 oc edit node/master-2.ocp.tektutor.org
 ```
+
+
+## Lab - Deploying nginx web server into OpenShift cluster
+```
+oc create deploy nginx --image=bitnami/nginx:latest --replicas=3
+
+oc get deployments
+oc get deployment
+oc get deploy
+
+oc get replicasets
+oc get replicaset
+oc get rs
+
+oc get pods
+oc get pod
+oc get po
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc create deploy nginx --image=bitnami/nginx:latest --replicas=3
+Warning: would violate PodSecurity "restricted:latest": allowPrivilegeEscalation != false (container "nginx" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "nginx" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "nginx" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "nginx" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+deployment.apps/nginx created
+
+(jegan@tektutor.org)$ oc get deployments
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   3/3     3            3           25s
+(jegan@tektutor.org)$ oc get deployment
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   3/3     3            3           27s
+(jegan@tektutor.org)$ oc get deploy
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   3/3     3            3           29s
+
+(jegan@tektutor.org)$ oc get replicasets
+NAME               DESIRED   CURRENT   READY   AGE
+nginx-66664d749f   3         3         3       52s
+(jegan@tektutor.org)$ oc get replicaset
+NAME               DESIRED   CURRENT   READY   AGE
+nginx-66664d749f   3         3         3       55s
+(jegan@tektutor.org)$ oc get rs
+NAME               DESIRED   CURRENT   READY   AGE
+nginx-66664d749f   3         3         3       58s
+
+(jegan@tektutor.org)$ oc get pods
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-66664d749f-fggcz   1/1     Running   0          77s
+nginx-66664d749f-fz569   1/1     Running   0          77s
+nginx-66664d749f-wwq9m   1/1     Running   0          77s
+(jegan@tektutor.org)$ oc get pod
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-66664d749f-fggcz   1/1     Running   0          80s
+nginx-66664d749f-fz569   1/1     Running   0          80s
+nginx-66664d749f-wwq9m   1/1     Running   0          80s
+(jegan@tektutor.org)$ oc get po
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-66664d749f-fggcz   1/1     Running   0          82s
+nginx-66664d749f-fz569   1/1     Running   0          82s
+nginx-66664d749f-wwq9m   1/1     Running   0          82s
+</pre>
