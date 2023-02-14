@@ -317,3 +317,8 @@ Allocated resources:
   hugepages-2Mi      0 (0%)       0 (0%)
 Events:              <none>
 </pre>
+
+## Editing node
+```
+oc edit node/master-2.ocp.tektutor.org
+```
