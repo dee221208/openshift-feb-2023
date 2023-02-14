@@ -875,3 +875,20 @@ Commercial support is available at
 </body>
 </html>
 ```
+
+## Lab - Understanding Service Discovery
+The below docker image has curl utility installed in it, we need curl utility to test the service discovery.
+```
+oc create deploy hello --image=tektutor/spring-ms:1.0
+```
+Open a shell inside the hello pod
+```
+oc rsh deploy/hello
+curl http://nginx:8080
+```
+
+In the above, nginx is the name of the ClusterIP service and port 8080 is the service port.
+
+Service Discovery is nothing but accessing a service using its name, the Core DNS in OpenShift helps resolve the name of the service into its corresponding IP address on the fly.
+
+
