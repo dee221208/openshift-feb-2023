@@ -798,7 +798,7 @@ You may now access the web page either using curl or on lab machine web browser 
 ```
 
 Expected output
-<pre>
+```
 (jegan@tektutor.org)$ oc get deploy
 NAME    READY   UP-TO-DATE   AVAILABLE   AGE
 nginx   5/5     5            5           36m
