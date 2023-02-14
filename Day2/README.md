@@ -384,6 +384,20 @@ nginx-66664d749f-fz569   1/1     Running   0          82s
 nginx-66664d749f-wwq9m   1/1     Running   0          82s
 </pre>
 
+## Creating a project
+```
+oc new-project jegan
+```
+
+## Finding the currently active project
+```
+oc project
+```
+
+## Switching to a particular project
+```
+oc project jegan
+```
 
 ## What happens when you create a deployment?
 ```
