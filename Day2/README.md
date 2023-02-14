@@ -791,3 +791,87 @@ Handling connection for 8080
 </pre>
 
 You may now access the web page either using curl or on lab machine web browser using localhost:8080
+
+
+## Creating a ClusterIP Internal Service for your nginx deployment
+```
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc get deploy
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   5/5     5            5           36m
+(jegan@tektutor.org)$ oc expose deploy/nginx --type=ClusterIP --port=8080
+service/nginx exposed
+
+(jegan@tektutor.org)$ oc get services
+NAME    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+nginx   ClusterIP   172.30.19.152   <none>        8080/TCP   4s
+
+(jegan@tektutor.org)$ oc get service
+NAME    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+nginx   ClusterIP   172.30.19.152   <none>        8080/TCP   6s
+
+(jegan@tektutor.org)$ oc get svc
+NAME    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+nginx   ClusterIP   172.30.19.152   <none>        8080/TCP   8s
+
+(jegan@tektutor.org)$ oc describe svc/nginx
+Name:              nginx
+Namespace:         jegan
+Labels:            app=nginx
+Annotations:       <none>
+Selector:          app=nginx
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                172.30.19.152
+IPs:               172.30.19.152
+Port:              <unset>  8080/TCP
+TargetPort:        8080/TCP
+Endpoints:         10.128.0.104:8080,10.128.3.168:8080,10.129.0.93:8080 + 2 more...
+Session Affinity:  None
+Events:            <none>
+
+(jegan@tektutor.org)$ oc get po -o wide
+NAME                     READY   STATUS    RESTARTS   AGE   IP             NODE                        NOMINATED NODE   READINESS GATES
+nginx-7fc97856d6-77z48   1/1     Running   0          16m   10.131.0.41    worker-2.ocp.tektutor.org   <none>           <none>
+nginx-7fc97856d6-fqspq   1/1     Running   0          16m   10.130.0.88    master-3.ocp.tektutor.org   <none>           <none>
+nginx-7fc97856d6-tq8x5   1/1     Running   0          16m   10.128.0.104   master-2.ocp.tektutor.org   <none>           <none>
+nginx-7fc97856d6-zqnkl   1/1     Running   0          33m   10.128.3.168   worker-1.ocp.tektutor.org   <none>           <none>
+nginx-7fc97856d6-zx2v8   1/1     Running   0          16m   10.129.0.93    master-1.ocp.tektutor.org   <none>           <none>
+
+(jegan@tektutor.org)$ oc expose svc/nginx
+route.route.openshift.io/nginx exposed
+
+(jegan@tektutor.org)$ oc get route
+NAME    HOST/PORT                           PATH   SERVICES   PORT   TERMINATION   WILDCARD
+nginx   nginx-jegan.apps.ocp.tektutor.org          nginx      8080                 None
+(jegan@tektutor.org)$ curl nginx-jegan.apps.ocp.tektutor.org
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
