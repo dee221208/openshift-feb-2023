@@ -771,3 +771,20 @@ nginx-7fc97856d6-tq8x5   1/1     Running   0          25s   10.128.0.104   maste
 nginx-7fc97856d6-zqnkl   1/1     Running   0          17m   10.128.3.168   worker-1.ocp.tektutor.org   <none>           <none>
 nginx-7fc97856d6-zx2v8   1/1     Running   0          25s   10.129.0.93    master-1.ocp.tektutor.org   <none>           <none>
 </pre>
+
+
+## Lab - Testing if you are able to access the Web page from an nginx Pod
+```
+oc port-forward nginx-7fc97856d6-77z48 8080:8080
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ <b>oc port-forward nginx-7fc97856d6-77z48 8080:8080</b>
+Forwarding from 127.0.0.1:8080 -> 8080
+Forwarding from [::1]:8080 -> 8080
+Handling connection for 8080
+Handling connection for 8080
+</pre>
+
+You may now access the web page either using curl or on lab machine web browser using localhost:8080
