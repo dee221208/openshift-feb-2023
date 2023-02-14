@@ -893,3 +893,210 @@ In the above, nginx is the name of the ClusterIP service and port 8080 is the se
 Service Discovery is nothing but accessing a service using its name, the Core DNS in OpenShift helps resolve the name of the service into its corresponding IP address on the fly.
 
 Service Discovery only works within the Cluster irrespective of the Service type.
+
+
+## Lab - Creating an external NodePort service for nginx deployment
+```
+```
+
+Expected output
+<pre>
+(jegan@tektutor.org)$ oc get deploy
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+hello   1/1     1            1           33m
+nginx   1/1     1            1           101m
+(jegan@tektutor.org)$ oc get svc
+NAME    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+nginx   ClusterIP   172.30.20.180   <none>        8080/TCP   44m
+(jegan@tektutor.org)$ oc delete svc/nginx
+service "nginx" deleted
+(jegan@tektutor.org)$ oc expose deploy/nginx --type=NodePort --port=8080
+service/nginx exposed
+(jegan@tektutor.org)$ oc get svc
+NAME    TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+nginx   NodePort   172.30.69.223   <none>        8080:30401/TCP   2s
+(jegan@tektutor.org)$ oc describe svc/nginx
+Name:                     nginx
+Namespace:                jegan
+Labels:                   app=nginx
+Annotations:              <none>
+Selector:                 app=nginx
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       172.30.69.223
+IPs:                      172.30.69.223
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  30401/TCP
+Endpoints:                10.130.0.88:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+(jegan@tektutor.org)$ oc get nodes -o wide
+NAME                        STATUS   ROLES                         AGE   VERSION           INTERNAL-IP       EXTERNAL-IP   OS-IMAGE                                                        KERNEL-VERSION                 CONTAINER-RUNTIME
+master-1.ocp.tektutor.org   Ready    control-plane,master,worker   4d    v1.25.4+a34b9e9   192.168.122.59    <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+master-2.ocp.tektutor.org   Ready    control-plane,master,worker   4d    v1.25.4+a34b9e9   192.168.122.113   <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+master-3.ocp.tektutor.org   Ready    control-plane,master,worker   4d    v1.25.4+a34b9e9   192.168.122.76    <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+worker-1.ocp.tektutor.org   Ready    worker                        4d    v1.25.4+a34b9e9   192.168.122.56    <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+worker-2.ocp.tektutor.org   Ready    worker                        4d    v1.25.4+a34b9e9   192.168.122.176   <none>        Red Hat Enterprise Linux CoreOS 412.86.202301311551-0 (Ootpa)   4.18.0-372.43.1.el8_6.x86_64   cri-o://1.25.2-4.rhaos4.12.git66af2f6.el8
+(jegan@tektutor.org)$ curl 192.168.122.176:30401
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+(jegan@tektutor.org)$ curl 192.168.122.56:30401
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+(jegan@tektutor.org)$ curl 192.168.122.76:30401
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+(jegan@tektutor.org)$ curl 192.168.122.113:30401
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+(jegan@tektutor.org)$ curl 192.168.122.59:30401
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+(jegan@tektutor.org)$ oc rsh deploy/hello 
+sh-4.4$ curl http://nginx:8080
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+sh-4.4$ exit
+exit
+</pre>
