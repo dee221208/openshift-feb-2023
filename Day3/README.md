@@ -85,3 +85,12 @@ pod/example runs tektutor/spring-ms:1.0
 ```
 oc create deployment nginx --image=bitnami/nginx:latest -o yaml --dry-run=client > nginx-deploy.yml
 ```
+
+## Lab - Create the nginx deploying using a declarative manifest(yaml) file
+```
+(jegan@tektutor.org)$ oc create -f nginx-deploy.yml --save-config
+
+Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "nginx" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "nginx" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "nginx" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "nginx" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+
+deployment.apps/nginx created
+```
