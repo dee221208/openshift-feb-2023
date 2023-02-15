@@ -88,9 +88,31 @@ oc create deployment nginx --image=bitnami/nginx:latest -o yaml --dry-run=client
 
 ## Lab - Create the nginx deploying using a declarative manifest(yaml) file
 ```
+cd ~/openshift-feb-2023
+git pull
+
+cd Day3/declarative-scripts
+oc create -f nginx-deploy.yml --save-config
+
+oc get deploy
+oc get rs,po
+```
+
+<pre>
 (jegan@tektutor.org)$ oc create -f nginx-deploy.yml --save-config
 
 Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "nginx" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "nginx" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "nginx" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "nginx" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
 
 deployment.apps/nginx created
-```
+
+(jegan@tektutor.org)$ oc get deploy
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   1/1     1            1           66s
+(jegan@tektutor.org)$ oc get rs,po
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-66664d749f   1         1         1       70s
+
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/example                  1/1     Running   0          64m
+pod/nginx-66664d749f-f826g   1/1     Running   0          70s
+</pre>
