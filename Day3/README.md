@@ -34,3 +34,9 @@ oc get build
 oc start-build bc/spring-ms
 oc logs -f bc/spring-ms
 ```
+
+## Lab - Deploying application using S2I(Source to Image) strategy
+```
+oc new-app registry.access.redhat.com/ubi8/openjdk-11~https://github.com/tektutor/spring-ms.git --strategy=source
+```
+In the above command, we have requested OpenShift to use registry.access.redhat.com/ubi8/openjdk-11 as a S2I image to perform the build and deploy it.
