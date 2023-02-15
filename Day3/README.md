@@ -116,3 +116,62 @@ NAME                         READY   STATUS    RESTARTS   AGE
 pod/example                  1/1     Running   0          64m
 pod/nginx-66664d749f-f826g   1/1     Running   0          70s
 </pre>
+
+## Lab - Creating a declarative manifest file for clusterip service
+```
+oc expose deploy/nginx --type=ClusterIP --port=8080 -o yaml --dry-run=client > nginx-clusterip-svc.yml
+```
+
+## Lab - Creating a declarative manifest file for clusterip internal service
+```
+cd ~/openshift-feb-2023
+git pull
+
+cd Day3/declarative-scripts
+oc expose deploy/nginx --type=ClusterIP --port=8080 -o yaml --dry-run=client > nginx-clusterip-svc.yml
+
+oc create -f nginx-clusterip-svc --save-config
+oc get svc
+oc describe svc/nginx
+```
+
+## Lab - Creating a declarative manifest file for nodeport external service
+```
+cd ~/openshift-feb-2023
+git pull
+
+cd Day3/declarative-scripts
+oc expose deploy/nginx --type=NodePort --port=8080 -o yaml --dry-run=client > nginx-nodeport-svc.yml
+
+oc delete -f nginx-clusterip-svc.yml
+oc create -f nginx-nodeport-svc --save-config
+oc get svc
+oc describe svc/nginx
+```
+
+## Lab - Creating a declarative manifest file for loadbalancer external service
+```
+cd ~/openshift-feb-2023
+git pull
+
+cd Day3/declarative-scripts
+oc expose deploy/nginx --type=LoadBalancer --port=8080 -o yaml --dry-run=client > nginx-lb-svc.yml
+
+oc delete -f nginx-nodeport-svc.yml
+oc create -f nginx-lb-svc --save-config
+oc get svc
+oc describe svc/nginx
+```
+
+## Lab - Creating a route for the service
+```
+cd ~/openshift-feb-2023
+git pull
+
+cd Day3/declarative-scripts
+oc expose svc/nginx -o yaml --dry-run=client > nginx-route.yml
+
+oc create -f nginx-route --save-config
+oc get route
+oc describe route/nginx
+```
