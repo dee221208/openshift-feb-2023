@@ -121,6 +121,13 @@
   - supports Private Container Registry out of the box
   - you get support from Red Hat ( an IBM company )
 
+## Kubernetes High Level Architecture
+![Kubernetes High Level Architecture](KubernetesArchitecture.png)
+
+## OpenShift High Level Architecture
+![OpenShift High Level Architecture](OpenShift Architecture.png)
+![OpenShift High Level Architecture](OpenShiftArchitecture.png)
+
 # OpenShift Command Reference
 
 ## Finding the openshift version
@@ -1201,3 +1208,9 @@ Commercial support is available at
 </body>
 </html>
 ```
+
+## Installing Code Ready Container (CRC) OpenShift in your Laptop/Desktop
+
+This setup will work in Windows, Linux and Mac OS.
+
+
