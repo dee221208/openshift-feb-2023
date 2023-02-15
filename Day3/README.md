@@ -1,6 +1,6 @@
 # Day3
 
-## Deploying an application using github repo
+## Lab - Deploying an application using github repo
 
 Deploying using docker strategy i.e using Dockerfile
 ```
@@ -16,30 +16,29 @@ oc logs -f bc/spring-ms
 oc expose svc/spring-ms
 ```
 
-## Listing the buildconfigs
+## Lab - Listing the buildconfigs
 ```
 oc get buildconfigs
 oc get buildconfig
 oc get bc
 ```
 
-## Listing the builds
+## Lab - Listing the builds
 ```
 oc get builds
 oc get build
 ```
 
-## Starting a build from buildconfig
+## Lab - Starting a build from buildconfig
 ```
 oc start-build bc/spring-ms
 oc logs -f bc/spring-ms
 ```
 
-## Clean up all resources in your project
+## Lab - Clean up all resources in your project
 ```
 oc delete deploy/spring-ms svc/spring-ms bc/spring-ms is/spring-ms
 ```
-
 
 ## Lab - Deploying application using S2I(Source to Image) strategy
 ```
