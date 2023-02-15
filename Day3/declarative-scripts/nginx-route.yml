@@ -1,7 +1,6 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  creationTimestamp: null
   labels:
     app: nginx
   name: nginx
@@ -12,4 +11,3 @@ spec:
     kind: ""
     name: nginx
     weight: null
-status: {}

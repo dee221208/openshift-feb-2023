@@ -1,9 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: ReplicaSet
 metadata:
   labels:
     app: nginx
-  name: nginx
+  name: nginx-rs
 spec:
   replicas: 1
   selector:
@@ -15,5 +15,5 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: bitnami/nginx:1.21
+      - image: bitnami/nginx:latest
         name: nginx
