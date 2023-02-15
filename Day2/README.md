@@ -127,6 +127,7 @@
 ## OpenShift High Level Architecture
 ![OpenShift High Level Architecture](OpenShiftArchitecture2.png)
 ![OpenShift High Level Architecture](OpenShiftArchitecture.png)
+![OpenShift Master Node](master-node.png)
 
 # OpenShift Command Reference
 
