@@ -125,7 +125,7 @@
 ![Kubernetes High Level Architecture](KubernetesArchitecture.png)
 
 ## OpenShift High Level Architecture
-![OpenShift High Level Architecture](OpenShift Architecture.png)
+![OpenShift High Level Architecture](OpenShiftArchitecture2.png)
 ![OpenShift High Level Architecture](OpenShiftArchitecture.png)
 
 # OpenShift Command Reference
