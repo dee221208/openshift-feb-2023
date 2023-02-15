@@ -80,3 +80,8 @@ pod/example runs tektutor/spring-ms:1.0
 
 1 info identified, use 'oc status --suggest' to see details.
 </pre>
+
+## Lab - Autogenerate nginx-deploy.yml declarative script
+```
+oc create deployment nginx --image=bitnami/nginx:latest -o yaml --dry-run=client > nginx-deploy.yml
+```
