@@ -35,6 +35,12 @@ oc start-build bc/spring-ms
 oc logs -f bc/spring-ms
 ```
 
+## Clean up all resources in your project
+```
+oc delete deploy/spring-ms svc/spring-ms bc/spring-ms is/spring-ms
+```
+
+
 ## Lab - Deploying application using S2I(Source to Image) strategy
 ```
 oc new-app registry.access.redhat.com/ubi8/openjdk-11~https://github.com/tektutor/spring-ms.git --strategy=source
