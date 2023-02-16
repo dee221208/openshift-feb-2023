@@ -58,4 +58,6 @@ oc create -f wordpress-svc.yml
 oc create -f wordpress-route.yml
 ```
 
-If everything went well, you would be able to click on the Wordpress route from Developer ==> Topology and see the Wordpress page.
+If everything went well, you would be able to click on the Wordpress route from Developer ==> Topology and see the Wordpress page as shown below.
+![Wordpress](wordpress.png)
+
