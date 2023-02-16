@@ -35,3 +35,5 @@ exit
 ```
 
 Now try deleting the mysql pod from your web console and observe a new mysql pod getting created and moves to running state.  Once it moves to running states, get inside the Pod terminal and verify if the tektutor database and training tables has retained the records inserted in the previous Pod.
+
+The take away message is Persistent Volume helps retain the data even if the Pods are replaced with new ones. This way we will not loose the application data.
