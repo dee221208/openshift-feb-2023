@@ -37,3 +37,25 @@ exit
 Now try deleting the mysql pod from your web console and observe a new mysql pod getting created and moves to running state.  Once it moves to running states, get inside the Pod terminal and verify if the tektutor database and training tables has retained the records inserted in the previous Pod.
 
 The take away message is Persistent Volume helps retain the data even if the Pods are replaced with new ones. This way we will not loose the application data.
+
+## Lab - Deploying wordpress and mariadb server
+
+Make sure, you delete the mysql deployment and the corresponding persistent volume and claims.  Also ensure the /var/userxy folder contents are deleted.
+
+```
+cd ~/openshift-feb-2023
+git pull
+
+cd Day4/wordpress
+
+oc create -f mysql-pv.yml
+oc create -f mysql-pvc.yml
+oc create -f mysql-deploy.yml
+oc create -f mysql-svc.yml
+
+oc create -f wordpress-deploy.yml
+oc create -f wordpress-svc.yml
+oc create -f wordpress-route.yml
+```
+
+If everything went well, you would be able to click on the Wordpress route from Developer ==> Topology and see the Wordpress page.
