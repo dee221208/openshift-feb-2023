@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: wordpress
+  name: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+
+      - name: wordpress
+        image: bitnami/wordpress:latest
+
+        env:
+        - name: WORDPRESS_DATABASE_NAME
+          value: wordpress
+
+        - name: WORDPRESS_DATABASE_USER
+          value: root
+
+        - name: WORDPRESS_DATABASE_PASSWORD
+          value: root@123
+            
+        - name: WORDPRESS_DATABASE_HOST 
+          value: mysql
