@@ -40,7 +40,7 @@ The take away message is Persistent Volume helps retain the data even if the Pod
 
 ## Lab - Deploying wordpress and mariadb server
 
-Make sure, you delete the mysql deployment and the corresponding persistent volume and claims.  Also ensure the /var/userxy folder contents are deleted.
+Make sure, you deleted the mysql deployment and the corresponding persistent volume and claims.  Also ensure the /var/user<xy> folder contents are deleted before proceeding further.
 
 ```
 cd ~/openshift-feb-2023
