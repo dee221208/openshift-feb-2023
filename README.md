@@ -6,3 +6,12 @@ LinkedIn - Jeganathan Swaminathan
 YouTube - youtube.com/@JeganathanSwaminathan
 Medium blog - medium.com/tektutor
 ```
+
+
+## Cloning this repository
+
+```
+cd ~
+git clone https://github.com/tektutor/openshift-feb-2023
+cd openshift-feb-2023
+```
