@@ -73,3 +73,17 @@ For details on the Wordpress environment variables, you may refer here
 <pre>
 https://hub.docker.com/r/bitnami/wordpress
 </pre>  
+
+## What is HELM ?
+- package for Kubernets and OpenShift applications
+- the packaged application is called Charts
+- HELM a specific folder structure and we need place our manifest under template folder
+- through HELM we install applications packaged as Helm Charts, uninstall, upgrade application, etc.,
+
+  
+## Installing HELM on your CentOS box
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh  
+```
