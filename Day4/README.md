@@ -9,7 +9,29 @@ cd ~/openshift-feb-2023
 git pull
 
 cd Day4/mysql-with-persistent-storage
+
+oc project
+
 oc create -f mysql-pv.yml
 oc create -f mysql-pvc.yml
 oc create -f mysql-deploy.yml
 ```
+
+If everything went well, you should see the mysql pod running under your project namespace from your OpenShift webconsole. Once you see the mysql Pod is running state, click on the Pod Terminal in the OpenShift web console.
+
+Try these commands under the mysql pod terminal from Web console. Type 'root@123' as password when it prompts.
+```
+mysql -u root -p
+SHOW DATABASES
+CREATE DATABASE tektutor;
+USE tektutor;
+CREATE TABLE training ( id INT NOT NULL, name VARCHAR(50), duration VARCHAR(50), PRIMARY KEY(id) );
+INSERT INTO training VALUES ( 1, "DevOps", "5 Days" );
+INSERT INTO training VALUES ( 2, "Advanced Kubernetes", "5 Days" );
+INSERT INTO training VALUES ( 3, "Tekton CICD with OpenShift ", "5 Days" );
+SELECT * FROM training;
+exit
+exit
+```
+
+Now try deleting the mysql pod from your web console and observe a new mysql pod getting created and moves to running state.  Once it moves to running states, get inside the Pod terminal and verify if the tektutor database and training tables has retained the records inserted in the previous Pod.
