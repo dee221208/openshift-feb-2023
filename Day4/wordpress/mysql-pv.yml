@@ -12,4 +12,4 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: 192.168.1.108 # Replace this IP with your CentOS IP
-    path: /mnt/mysql # Replace this path with /var/userxy folder, xy for user01 will be 01 and 17 for user17, etc.,
+    path: /var/mysql # Replace this path with /var/userxy folder, xy for user01 will be 01 and 17 for user17, etc.,

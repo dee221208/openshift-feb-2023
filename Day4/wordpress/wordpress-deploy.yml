@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: wordpress
-  name: wordpress
+  name: wordpress 
 spec:
   selector:
     matchLabels:
@@ -14,7 +14,6 @@ spec:
         app: wordpress
     spec:
       containers:
-
       - name: wordpress
         image: bitnami/wordpress:latest
 
@@ -22,11 +21,11 @@ spec:
         - name: WORDPRESS_DATABASE_NAME
           value: wordpress
 
-        - name: WORDPRESS_DATABASE_USER
-          value: root
+        - name: WORDPRESS_DATABASE_HOST
+          value: mysql
+
+        - name: WORDPRESS_DATABASE_USER 
+          value: root 
 
         - name: WORDPRESS_DATABASE_PASSWORD
           value: root@123
-            
-        - name: WORDPRESS_DATABASE_HOST 
-          value: mysql
