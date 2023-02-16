@@ -64,3 +64,13 @@ If everything went well, you should be able to see the topology status as below
 Now you may click on the Wordpress route from Developer ==> Topology and see the Wordpress page as shown below.
 ![Wordpress](wordpress.png)
 
+For details on the maridab environment variables, you may refer here
+<pre>
+https://hub.docker.com/r/bitnami/mariadb
+</pre>
+
+For details on the Wordpress environment variables, you may refer here
+<pre>
+https://hub.docker.com/r/bitnami/wordpress
+</pre>
+
