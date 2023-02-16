@@ -72,5 +72,4 @@ https://hub.docker.com/r/bitnami/mariadb
 For details on the Wordpress environment variables, you may refer here
 <pre>
 https://hub.docker.com/r/bitnami/wordpress
-</pre>
-
+</pre>  
