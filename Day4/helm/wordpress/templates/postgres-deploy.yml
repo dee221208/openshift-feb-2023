@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: postgres
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc-jegan  # Replace 'jegan' with your name
+      containers:
+      - name: postgres
+        image: docker.io/bitnami/postgresql:latest
+
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /bitnami/postgresql
+
+        env:
+        - name: POSTGRESQL_PASSWORD 
+          value: root@123
