@@ -16,7 +16,7 @@ spec:
       volumes:
       - name: mysql-storage
         persistentVolumeClaim:
-          claimName: mysql-pvc-jegan
+          claimName: mysql-pvc-jegan  # Replace 'jegan' with your name
       containers:
       - name: mysql
         image: bitnami/mysql:latest
