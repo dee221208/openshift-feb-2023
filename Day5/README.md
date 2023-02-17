@@ -54,9 +54,6 @@ The port 8080 on the left, you will have to change it to 8001 if user is user01,
 Append your name with the jenkins container name like jenkins-jegan
 
 ```
-mkdir -p /tmp/jenkins
-chmod -R /tmp/jenkins
-
 docker run --name jenkins --hostname jenkins -p 8080:8080 -p 50000:50000 --restart=on-failure -v /tmp/jenkins:/var/jenkins_home jenkins/jenkins:lts-jdk11
 ```
 
