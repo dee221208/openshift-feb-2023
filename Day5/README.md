@@ -1,4 +1,4 @@
-# Day5
+# Day 5
 
 ## What is a Monolithic Architecture
 - pretty much all legacy applications that you use tody could be following this architecture
