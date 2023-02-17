@@ -110,4 +110,9 @@ WARNING: All illegal access operations will be denied in a future release
 2023-02-17 08:27:28.245+0000 [id=151]	INFO	hudson.util.Retrier#start: Performed the action check updates server successfully at the attempt #1
 </pre>
 
-Once you see your Jenkins 
+Once you see your Jenkins is up and running, you may open your Jenkins Dashboard from your RPS CentOS Lab machine Chrome browser
+```
+http://localhost:8080
+```
+
+![Continuous Integration](CICDOpenShift.png)
