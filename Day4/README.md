@@ -87,3 +87,33 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scrip
 chmod 700 get_helm.sh
 ./get_helm.sh  
 ```
+
+## Lab - Using config and secrets in your application
+```
+cd ~/openshift-feb-2023
+git pull
+
+cd Day4/wordpress
+oc create -f mysql-pv.yml
+oc create -f mysql-pvc.yml
+oc create -f mysql-deploy.yml
+oc create -f mysql-svc.yml
+  
+oc create -f wordpress-deploy.yml
+oc create -f wordpress-svc.yml
+oc create -f wordpress-route.yml
+```
+  
+## Using helm package managers
+```
+cd ~/openshift-feb-2023
+git pull
+
+cd Day4/helm
+helm create wordpress # This step is already done
+helm package wordpress
+helm install wordpress wordpress-0.1.0.tgz
+helm list
+helm uninstall wordpress
+```
+  
