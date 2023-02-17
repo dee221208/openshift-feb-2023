@@ -51,6 +51,8 @@ If your login is user01, then user the folder /tmp/jenkins01. If your login is u
 
 The port 8080 on the left, you will have to change it to 8001 if user is user01, if it is user15 then change the 8080 port on the left side to 8015 to avoid port conflicts.  Same way the left side 50000 port to 50001 if your user is user01, change it 50017 if your user is user17.
 
+Append your name with the jenkins container name like jenkins-jegan
+
 ```
 mkdir -p /tmp/jenkins
 chmod -R /tmp/jenkins
