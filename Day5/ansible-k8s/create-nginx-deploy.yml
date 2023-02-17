@@ -1,0 +1,30 @@
+- name: this playbook will deploy nginx into our custom project
+  hosts: localhost
+  vars_files:
+  - nginx-vars.yml 
+
+  tasks:
+  - name: Create an OpenShift project
+    kubernetes.core.k8s:
+      name: "{{projectName}}" 
+      api_version: v1
+      kind: Namespace
+      state: present 
+
+  - name: Create an nginx deployment 
+    kubernetes.core.k8s:
+        state: present
+        template:
+        - path: ./nginx-deploy.j2
+
+  - name: Create an nginx internal service 
+    kubernetes.core.k8s:
+        state: present
+        template:
+        - path: ./nginx-svc.j2
+
+  - name: Create an external route 
+    kubernetes.core.k8s:
+        state: present
+        template:
+        - path: ./nginx-route.j2

@@ -1,0 +1,12 @@
+Today's Agenda
+++++++++++++++
+Docker Network Model
+
+Basic Overview of OpenShift Networking Model
+  - Flannel
+  - Calico
+  - Weave
+
+What is a Microservice?
+Monolith vs Microservice Architecture
+CI/CD with Jenkins, Ansible & RedHat OpenShift

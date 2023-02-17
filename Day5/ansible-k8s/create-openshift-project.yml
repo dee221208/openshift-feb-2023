@@ -1,0 +1,9 @@
+- name: This Playbook demonstrates creating an Openshift project
+  hosts: localhost
+  tasks:
+  - name: Create a k8s namespace
+    kubernetes.core.k8s:
+      name: testing-jegan
+      api_version: v1
+      kind: Namespace
+      state: present 

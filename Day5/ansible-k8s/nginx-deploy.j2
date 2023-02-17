@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: "{{projectName}}" 
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: nginx
+  template:
+    metadata:
+      labels:
+        deployment: nginx
+    spec:
+      containers:
+      - image: bitnami/nginx:latest 
+        name: nginx
+        ports:
+        - containerPort: 8080
