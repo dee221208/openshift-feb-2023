@@ -65,8 +65,7 @@
         apiVersion: route.openshift.io/v1
         kind: Route
         metadata:
-          namespace: "{{projectName}}" 
-
+          namespace: training 
           labels:
             app: nginx
           name: nginx
