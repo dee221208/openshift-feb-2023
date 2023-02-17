@@ -47,9 +47,9 @@ Drawbacks
 - if a functionality involves calling many microservices, too many hops might bring down the overall performance
 
 ## Launch Jenkins as a docker container
-If your login is user01, then create a folder /tmp/jenkins1. If your login is user17 then create a folder /tmp/jenkins17.  
+If your login is user01, then user the folder /tmp/jenkins01. If your login is user17 then use the folder /tmp/jenkins17.  
 
-The port 8080 on the left, you will have to change it to 8001 if user is user01, if it is user15 then change the 8080 port on the left side to 8015 to avoid port conflicts.
+The port 8080 on the left, you will have to change it to 8001 if user is user01, if it is user15 then change the 8080 port on the left side to 8015 to avoid port conflicts.  Same way the left side 50000 port to 50001 if your user is user01, change it 50017 if your user is user17.
 
 ```
 mkdir -p /tmp/jenkins
