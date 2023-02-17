@@ -47,7 +47,9 @@ Drawbacks
 - if a functionality involves calling many microservices, too many hops might bring down the overall performance
 
 ## Launch Jenkins as a docker container
-If your login is user01, then create a folder /tmp/jenkins1. If your login is user17 then create a folder /tmp/jenkins17.
+If your login is user01, then create a folder /tmp/jenkins1. If your login is user17 then create a folder /tmp/jenkins17.  
+
+The port 8080 on the left, you will have to change it to 8001 if user is user01, if it is user15 then change the 8080 port on the left side to 8015 to avoid port conflicts.
 
 ```
 mkdir -p /tmp/jenkins
@@ -108,3 +110,5 @@ WARNING: All illegal access operations will be denied in a future release
 2023-02-17 08:27:28.244+0000 [id=151]	INFO	h.m.DownloadService$Downloadable#load: Obtained the updated data file for hudson.tasks.Maven.MavenInstaller
 2023-02-17 08:27:28.245+0000 [id=151]	INFO	hudson.util.Retrier#start: Performed the action check updates server successfully at the attempt #1
 </pre>
+
+Once you see your Jenkins 
