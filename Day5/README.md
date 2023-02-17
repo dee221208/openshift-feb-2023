@@ -47,6 +47,8 @@ Drawbacks
 - if a functionality involves calling many microservices, too many hops might bring down the overall performance
 
 ## Launch Jenkins as a docker container
+If your login is user01, then create a folder /tmp/jenkins1. If your login is user17 then create a folder /tmp/jenkins17.
+
 ```
 mkdir -p /tmp/jenkins
 chmod -R /tmp/jenkins
