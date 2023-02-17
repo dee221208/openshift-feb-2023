@@ -1,0 +1,79 @@
+- name: this playbook will deploy nginx into our custom project
+  hosts: localhost
+  vars_files:
+  - nginx-vars.yml 
+
+  tasks:
+  - name: Create an OpenShift project
+    kubernetes.core.k8s:
+      name: training 
+      api_version: v1
+      kind: Namespace
+      state: present 
+
+  - name: Create an nginx deployment 
+    kubernetes.core.k8s:
+      state: present
+      definition:
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          namespace: training 
+          labels:
+            app: nginx
+          name: nginx
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              deployment: nginx
+          template:
+            metadata:
+              labels:
+                deployment: nginx
+            spec:
+              containers:
+              - image: bitnami/nginx:latest 
+                name: nginx
+                ports:
+                - containerPort: 8080
+
+  - name: Create an nginx internal service 
+    kubernetes.core.k8s:
+      state: present
+      definition:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          labels:
+            app: nginx
+          name: nginx
+          namespace: training 
+        spec:
+          ports:
+          - port: 8080
+            protocol: TCP
+            targetPort: 8080
+          selector:
+            deployment: nginx
+          type: ClusterIP
+
+  - name: Create an external route 
+    kubernetes.core.k8s:
+      state: present
+      definition:
+        apiVersion: route.openshift.io/v1
+        kind: Route
+        metadata:
+          namespace: "{{projectName}}" 
+
+          labels:
+            app: nginx
+          name: nginx
+        spec:
+          port:
+            targetPort: 8080
+          to:
+            kind: ""
+            name: nginx
+            weight: null
